@@ -7,5 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface SearchEngineService {
-    List<ProductDTO> search(Map<String, String> filters, Integer order);
+    HashMap<Integer, ProductDTO> searchProducts(Map<String, String> filter, Integer order);
+    List<ProductDTO> getProductList(Map<String, String> filters, Integer order);
 }

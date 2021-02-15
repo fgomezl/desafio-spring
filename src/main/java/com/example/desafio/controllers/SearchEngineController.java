@@ -4,15 +4,12 @@ import com.example.desafio.dto.ProductDTO;
 import com.example.desafio.services.SearchEngineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -42,7 +39,7 @@ public class SearchEngineController {
         if (freeShipping != null) filters.put("freeShipping", freeShipping);
         if (prestige != null) filters.put("prestige", prestige);
 
-        return searchEngineService.search(filters, order);
+        return searchEngineService.getProductList(filters, order);
     }
     
 }
