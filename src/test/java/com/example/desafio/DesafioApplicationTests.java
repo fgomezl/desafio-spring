@@ -7,14 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.ArgumentMatchers.anyMap;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -23,7 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.ArgumentMatchers.*;
 
 
 @SpringBootTest
@@ -38,7 +34,6 @@ class DesafioApplicationTests {
 	@Test
 	public void shouldShowAllProducts() throws Exception{
 		List<ProductDTO> expectedResponse = new ArrayList<>();
-		HashMap<Integer, ProductDTO> map = new HashMap<>();
 
 		ProductDTO product1 = (new ProductDTO("Desmalezadora", "Herramientas", "Makita", 9600, 5, true, "****"));
 		ProductDTO product2 = (new ProductDTO("Taladro", "Herramientas", "Black & Decker", 12500, 7, true, "****"));
@@ -50,15 +45,7 @@ class DesafioApplicationTests {
 		expectedResponse.add(product3);
 		expectedResponse.add(product4);
 
-		map.put(1, product1);
-		map.put(2, product2);
-		map.put(3, product3);
-		map.put(4, product4);
-
 		when(repository.loadInventory()).thenReturn(expectedResponse);
-		//when(repository.orderList(repository.getInventory(), null)).thenReturn(expectedResponse);
-		//List<ProductDTO> respInventory = repository.getInventory();
-		//when(repository.searchProducts(new HashMap<>(), 0)).thenCallRealMethod();
 		this.mockMvc.perform(get("/api/v1/articles/"))
 				.andDo(print())
 				.andExpect(status().isOk())
